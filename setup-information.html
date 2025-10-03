@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Setup Instructions - AdClean KE</title>
+    <style>
+      :root {
+        --primary: #1a73e8;
+        --primary-dark: #1558b0;
+        --secondary: #f9fafb;
+        --text: #222;
+        --light-gray: #f1f1f1;
+        --white: #fff;
+        --shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--secondary);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      header {
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
+        color: var(--white);
+        padding: 2rem 1rem;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        font-weight: 700;
+      }
+
+      header p {
+        margin: 0.5rem 0 0;
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .instructions {
+        background: var(--white);
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: var(--shadow);
+        margin-bottom: 2rem;
+      }
+
+      .instructions h2 {
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .step {
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid #eee;
+      }
+
+      .step:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .step-number {
+        display: inline-block;
+        background: var(--primary);
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 30px;
+        margin-right: 10px;
+        font-weight: bold;
+      }
+
+      .step h3 {
+        display: inline-block;
+        margin-bottom: 1rem;
+      }
+
+      .step-content {
+        padding-left: 40px;
+      }
+
+      .device-tabs {
+        display: flex;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .device-tab {
+        padding: 0.75rem 1.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        border-bottom: 3px solid transparent;
+      }
+
+      .device-tab.active {
+        border-bottom-color: var(--primary);
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      .device-content {
+        display: none;
+      }
+
+      .device-content.active {
+        display: block;
+      }
+
+      code {
+        background: #f4f4f4;
+        padding: 0.5rem;
+        border-radius: 4px;
+        font-family: "Courier New", monospace;
+        display: block;
+        margin: 1rem 0;
+        overflow-x: auto;
+      }
+
+      .support {
+        background: var(--white);
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: var(--shadow);
+        text-align: center;
+      }
+
+      .support h2 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+
+      .support-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .support-option {
+        padding: 1.5rem;
+        background: var(--light-gray);
+        border-radius: 8px;
+      }
+
+      .support-option h3 {
+        margin-bottom: 0.5rem;
+        color: var(--primary);
+      }
+
+      footer {
+        background: #2c3e50;
+        color: var(--white);
+        padding: 2rem 1rem;
+        margin-top: 3rem;
+        text-align: center;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 1rem;
+        }
+
+        .instructions {
+          padding: 1.5rem;
+        }
+
+        .step-content {
+          padding-left: 0;
+        }
+
+        .device-tabs {
+          flex-direction: column;
+        }
+
+        .device-tab {
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>AdClean KE</h1>
+      <p>Setup Instructions</p>
+    </header>
+
+    <div class="container">
+      <div class="instructions">
+        <h2>How to Set Up AdClean KE</h2>
+
+        <div class="step">
+          <span class="step-number">1</span>
+          <h3>Choose Your Device Type</h3>
+          <div class="step-content">
+            <div class="device-tabs">
+              <button class="device-tab active" data-device="android">
+                Android
+              </button>
+              <button class="device-tab" data-device="ios">iOS</button>
+              <button class="device-tab" data-device="windows">Windows</button>
+              <button class="device-tab" data-device="mac">Mac</button>
+              <button class="device-tab" data-device="router">Router</button>
+            </div>
+
+            <div class="device-content active" id="android-content">
+              <h4>Android Setup</h4>
+              <p>
+                Follow these steps to configure AdClean KE on your Android
+                device:
+              </p>
+              <ol>
+                <li>Go to <strong>Settings > Network & Internet</strong></li>
+                <li>Tap on <strong>Private DNS</strong></li>
+                <li>Select <strong>Private DNS provider hostname</strong></li>
+                <li>Enter: <code>dns.adclean.co.ke</code></li>
+                <li>Tap <strong>Save</strong></li>
+              </ol>
+              <p>Your Android device is now protected!</p>
+            </div>
+
+            <div class="device-content" id="ios-content">
+              <h4>iOS Setup</h4>
+              <p>
+                Follow these steps to configure AdClean KE on your iPhone or
+                iPad:
+              </p>
+              <ol>
+                <li>Go to <strong>Settings > Wi-Fi</strong></li>
+                <li>
+                  Tap the <strong>i</strong> icon next to your connected network
+                </li>
+                <li>Scroll down and tap <strong>Configure DNS</strong></li>
+                <li>Select <strong>Manual</strong></li>
+                <li>
+                  Remove any existing servers and add:
+                  <code>dns.adclean.co.ke</code>
+                </li>
+                <li>Tap <strong>Save</strong></li>
+              </ol>
+              <p>Your iOS device is now protected!</p>
+            </div>
+
+            <div class="device-content" id="windows-content">
+              <h4>Windows Setup</h4>
+              <p>
+                Follow these steps to configure AdClean KE on your Windows
+                computer:
+              </p>
+              <ol>
+                <li>
+                  Go to
+                  <strong
+                    >Control Panel > Network and Internet > Network and Sharing
+                    Center</strong
+                  >
+                </li>
+                <li>Click on <strong>Change adapter settings</strong></li>
+                <li>
+                  Right-click your active connection and select
+                  <strong>Properties</strong>
+                </li>
+                <li>
+                  Select
+                  <strong>Internet Protocol Version 4 (TCP/IPv4)</strong> and
+                  click <strong>Properties</strong>
+                </li>
+                <li>
+                  Select <strong>Use the following DNS server addresses</strong>
+                </li>
+                <li>
+                  Enter:
+                  <ul>
+                    <li>Preferred DNS server: <code>45.90.28.0</code></li>
+                    <li>Alternate DNS server: <code>45.90.30.0</code></li>
+                  </ul>
+                </li>
+                <li>Click <strong>OK</strong> to save</li>
+              </ol>
+            </div>
+
+            <div class="device-content" id="mac-content">
+              <h4>Mac Setup</h4>
+              <p>Follow these steps to configure AdClean KE on your Mac:</p>
+              <ol>
+                <li>Go to <strong>System Preferences > Network</strong></li>
+                <li>
+                  Select your active connection and click
+                  <strong>Advanced</strong>
+                </li>
+                <li>Go to the <strong>DNS</strong> tab</li>
+                <li>
+                  Click the <strong>+</strong> button and add:
+                  <code>45.90.28.0</code>
+                </li>
+                <li>
+                  Click <strong>+</strong> again and add:
+                  <code>45.90.30.0</code>
+                </li>
+                <li>
+                  Click <strong>OK</strong> and then <strong>Apply</strong>
+                </li>
+              </ol>
+            </div>
+
+            <div class="device-content" id="router-content">
+              <h4>Router Setup</h4>
+              <p>
+                Configure AdClean KE on your router to protect all devices on
+                your network:
+              </p>
+              <ol>
+                <li>
+                  Access your router's admin panel (usually 192.168.0.1 or
+                  192.168.1.1)
+                </li>
+                <li>
+                  Navigate to <strong>Internet Settings</strong> or
+                  <strong>DNS Settings</strong>
+                </li>
+                <li>
+                  Change DNS servers to:
+                  <ul>
+                    <li>Primary DNS: <code>45.90.28.0</code></li>
+                    <li>Secondary DNS: <code>45.90.30.0</code></li>
+                  </ul>
+                </li>
+                <li>Save changes and restart your router</li>
+              </ol>
+              <p>
+                <strong>Note:</strong> Router interfaces vary by manufacturer.
+                Check your router's manual for specific instructions.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-number">2</span>
+          <h3>Test Your Setup</h3>
+          <div class="step-content">
+            <p>After configuring AdClean KE, test if it's working:</p>
+            <ol>
+              <li>
+                Visit a website that normally shows ads (like a news site)
+              </li>
+              <li>Check if ads are blocked</li>
+              <li>
+                Visit <a href="https://dnsleaktest.com">dnsleaktest.com</a> to
+                verify your DNS
+              </li>
+            </ol>
+            <p>
+              If you still see ads, try clearing your browser cache or
+              restarting your device.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-number">3</span>
+          <h3>Troubleshooting</h3>
+          <div class="step-content">
+            <p><strong>Common issues and solutions:</strong></p>
+            <ul>
+              <li>
+                <strong>Ads still showing:</strong> Clear browser cache or try a
+                different browser
+              </li>
+              <li>
+                <strong>Connection issues:</strong> Restart your device and
+                router
+              </li>
+              <li>
+                <strong>Setup not working:</strong> Contact our support team for
+                assistance
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="support">
+        <h2>Need Help?</h2>
+        <p>
+          Our support team is ready to assist you with setup and troubleshooting
+        </p>
+
+        <div class="support-options">
+          <div class="support-option">
+            <h3>📧 Email Support</h3>
+            <p>
+              <a href="mailto:support@adclean.co.ke">support@adclean.co.ke</a>
+            </p>
+            <p>Response within 24 hours</p>
+          </div>
+
+          <div class="support-option">
+            <h3>💬 WhatsApp</h3>
+            <p><a href="https://wa.me/254794242155">+254 794 242 155</a></p>
+            <p>Quick responses during business hours</p>
+          </div>
+
+          <div class="support-option">
+            <h3>📞 Phone Support</h3>
+            <p><a href="tel:+254794242155">+254 794 242 155</a></p>
+            <p>Available 9AM-6PM EAT</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2025 AdClean KE. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const deviceTabs = document.querySelectorAll(".device-tab");
+        const deviceContents = document.querySelectorAll(".device-content");
+
+        deviceTabs.forEach((tab) => {
+          tab.addEventListener("click", function () {
+            const device = this.getAttribute("data-device");
+
+            // Update active tab
+            deviceTabs.forEach((t) => t.classList.remove("active"));
+            this.classList.add("active");
+
+            // Show corresponding content
+            deviceContents.forEach((content) => {
+              content.classList.remove("active");
+              if (content.id === `${device}-content`) {
+                content.classList.add("active");
+              }
+            });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

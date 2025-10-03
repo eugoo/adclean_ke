@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AdClean KE - Faster, Cleaner Internet</title>
+    <script src="https://js.paypal.com/sdk/js?client-id=AYY6N9b8Pp4dDcCiKu8Z7Q7aM3nX5q7H8eK2uF4sL1rT3vB6xY&currency=USD"></script>
+    <style>
+      :root {
+        --primary: #1a73e8;
+        --primary-dark: #1558b0;
+        --secondary: #f9fafb;
+        --text: #222;
+        --light-gray: #f1f1f1;
+        --white: #fff;
+        --shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        --success: #28a745;
+        --warning: #ffc107;
+        --danger: #dc3545;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--secondary);
+        color: var(--text);
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
+        color: var(--white);
+        padding: 2rem 1rem;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        font-weight: 700;
+      }
+
+      header p {
+        margin: 0.5rem 0 0;
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        flex: 1;
+      }
+
+      .hero {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 2rem;
+        background: var(--white);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+      }
+
+      .hero h2 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .pricing {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+      }
+
+      .plan {
+        background: var(--white);
+        border-radius: 16px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .plan::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--primary);
+      }
+
+      .plan.popular {
+        border-color: var(--primary);
+        transform: scale(1.05);
+      }
+
+      .popular-badge {
+        position: absolute;
+        top: 1rem;
+        right: -2rem;
+        background: var(--primary);
+        color: white;
+        padding: 0.5rem 3rem;
+        transform: rotate(45deg);
+        font-size: 0.8rem;
+        font-weight: bold;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .plan:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .plan.popular:hover {
+        transform: scale(1.05) translateY(-8px);
+      }
+
+      .plan h3 {
+        margin: 0 0 1rem;
+        color: var(--primary);
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      .plan .price {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 1rem 0;
+        color: var(--text);
+      }
+
+      .plan .price .currency {
+        font-size: 1rem;
+        color: #666;
+      }
+
+      .plan .period {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .plan-features {
+        list-style: none;
+        padding: 0;
+        margin: 1.5rem 0;
+        text-align: left;
+        flex-grow: 1;
+      }
+
+      .plan-features li {
+        margin-bottom: 0.8rem;
+        padding-left: 1.5rem;
+        position: relative;
+      }
+
+      .plan-features li:before {
+        content: "✓";
+        color: var(--success);
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+      }
+
+      .plan-features li.disabled {
+        color: #999;
+      }
+
+      .plan-features li.disabled:before {
+        content: "✗";
+        color: var(--danger);
+      }
+
+      .cta-button {
+        display: block;
+        margin-top: auto;
+        padding: 1rem 2rem;
+        background: var(--primary);
+        color: var(--white);
+        border-radius: 8px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        font-size: 1.1rem;
+        font-weight: 600;
+        width: 100%;
+      }
+
+      .cta-button:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+      }
+
+      .cta-button.secondary {
+        background: var(--light-gray);
+        color: var(--text);
+      }
+
+      .cta-button.secondary:hover {
+        background: #ddd;
+      }
+
+      .payment-options {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+      }
+
+      .feature {
+        text-align: center;
+        padding: 2rem;
+        background: var(--white);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+      }
+
+      .feature i {
+        font-size: 3rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+
+      .feature h3 {
+        margin-bottom: 1rem;
+        color: var(--primary);
+      }
+
+      .testimonials {
+        background: var(--white);
+        padding: 3rem;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        margin: 3rem 0;
+      }
+
+      .testimonials h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: var(--primary);
+      }
+
+      .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .testimonial {
+        padding: 1.5rem;
+        background: var(--light-gray);
+        border-radius: 8px;
+        border-left: 4px solid var(--primary);
+      }
+
+      .testimonial p {
+        font-style: italic;
+        margin-bottom: 1rem;
+      }
+
+      .testimonial .author {
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      footer {
+        background: #2c3e50;
+        color: var(--white);
+        padding: 3rem 1rem;
+        margin-top: auto;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .footer-section h3 {
+        margin-bottom: 1rem;
+        color: var(--primary);
+      }
+
+      .footer-section a {
+        color: #bbb;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-section a:hover {
+        color: var(--white);
+      }
+
+      .copyright {
+        text-align: center;
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid #34495e;
+        color: #bbb;
+      }
+
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(5px);
+      }
+
+      .modal-content {
+        background-color: var(--white);
+        padding: 2rem;
+        border-radius: 16px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 1rem;
+        right: 1.5rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #aaa;
+        background: none;
+        border: none;
+      }
+
+      .close-btn:hover {
+        color: var(--text);
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #555;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border 0.3s;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        border-color: var(--primary);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+      }
+
+      .payment-method {
+        display: none;
+      }
+
+      .payment-method.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .confirmation {
+        text-align: center;
+        padding: 2rem;
+        display: none;
+      }
+
+      .confirmation h3 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+
+      .status-pending {
+        color: var(--warning);
+      }
+
+      .status-success {
+        color: var(--success);
+      }
+
+      .status-failed {
+        color: var(--danger);
+      }
+
+      #paypal-button-container {
+        margin-top: 1rem;
+      }
+
+      .mpesa-instructions {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 1.5rem 0;
+        border-left: 4px solid var(--primary);
+      }
+
+      .mpesa-instructions h4 {
+        margin-bottom: 0.5rem;
+        color: var(--primary);
+      }
+
+      .loader {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid var(--primary);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 1rem;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Responsive styles */
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 2rem;
+        }
+
+        header p {
+          font-size: 1rem;
+        }
+
+        .pricing {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+        .plan.popular {
+          transform: none;
+        }
+
+        .container {
+          padding: 1rem;
+        }
+
+        .plan {
+          padding: 1.5rem;
+        }
+
+        .hero {
+          padding: 1.5rem;
+        }
+
+        .modal-content {
+          padding: 1.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        header h1 {
+          font-size: 1.8rem;
+        }
+
+        header p {
+          font-size: 0.9rem;
+        }
+
+        .plan .price {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>AdClean KE</h1>
+      <p>Faster, Cleaner, Data-Saving Internet for Gamers & Businesses</p>
+    </header>
+
+    <div class="container">
+      <section class="hero">
+        <h2>Experience the Internet Without Interruptions</h2>
+        <p>
+          Block ads, trackers, and malware while saving your mobile data.
+          Perfect for gamers, students, cybercafés, and businesses that demand
+          faster, cleaner internet experiences.
+        </p>
+      </section>
+
+      <section class="features">
+        <div class="feature">
+          <i>🚀</i>
+          <h3>Lightning Fast</h3>
+          <p>Pages load faster without ads and trackers slowing them down</p>
+        </div>
+        <div class="feature">
+          <i>🔒</i>
+          <h3>Enhanced Privacy</h3>
+          <p>Block tracking scripts and protect your online privacy</p>
+        </div>
+        <div class="feature">
+          <i>💰</i>
+          <h3>Save Data</h3>
+          <p>Reduce data consumption by up to 40% by blocking ads</p>
+        </div>
+        <div class="feature">
+          <i>🎮</i>
+          <h3>Gaming Optimized</h3>
+          <p>Reduce latency and improve gaming experience</p>
+        </div>
+      </section>
+
+      <section>
+        <h2
+          style="text-align: center; margin-bottom: 1rem; color: var(--primary)"
+        >
+          Choose Your Plan
+        </h2>
+        <p
+          style="
+            text-align: center;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+          "
+        >
+          All plans include ad blocking, malware protection, and data saving.
+          Cancel anytime.
+        </p>
+
+        <div class="pricing">
+          <div class="plan">
+            <h3>Free Trial</h3>
+            <div class="price"><span class="currency">KSh </span>0</div>
+            <div class="period">7 days free trial</div>
+            <ul class="plan-features">
+              <li>Ad & tracker blocking</li>
+              <li>Malware protection</li>
+              <li>Data saving</li>
+              <li>One device</li>
+              <li>No credit card required</li>
+            </ul>
+            <button class="cta-button" data-plan="trial" data-amount="0">
+              Start Free Trial
+            </button>
+          </div>
+          <div class="plan">
+            <h3>Basic</h3>
+            <div class="price"><span class="currency">KSh </span>80</div>
+            <div class="period">per month</div>
+            <ul class="plan-features">
+              <li>Ad & tracker blocking</li>
+              <li>Malware protection</li>
+              <li>Data saving</li>
+              <li>One device</li>
+              <li>Email support</li>
+            </ul>
+            <button class="cta-button" data-plan="basic" data-amount="80">
+              Subscribe Now
+            </button>
+            <div class="payment-options">Pay via M-Pesa or PayPal</div>
+          </div>
+          <div class="plan popular">
+            <div class="popular-badge">POPULAR</div>
+            <h3>Gamer</h3>
+            <div class="price"><span class="currency">KSh </span>150</div>
+            <div class="period">per month</div>
+            <ul class="plan-features">
+              <li>Everything in Basic</li>
+              <li>Gaming Mode optimization</li>
+              <li>Priority support</li>
+              <li>Up to 3 devices</li>
+              <li>Custom filters</li>
+            </ul>
+            <button class="cta-button" data-plan="gamer" data-amount="150">
+              Subscribe Now
+            </button>
+            <div class="payment-options">Pay via M-Pesa or PayPal</div>
+          </div>
+          <div class="plan">
+            <h3>Business</h3>
+            <div class="price"><span class="currency">KSh </span>1,500</div>
+            <div class="period">per month</div>
+            <ul class="plan-features">
+              <li>For cybercafés & venues</li>
+              <li>Unlimited devices</li>
+              <li>Dashboard access</li>
+              <li>Priority support</li>
+              <li>Custom configuration</li>
+            </ul>
+            <button class="cta-button" data-plan="venue" data-amount="1500">
+              Subscribe Now
+            </button>
+            <div class="payment-options">Pay via M-Pesa or PayPal</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial-grid">
+          <div class="testimonial">
+            <p>
+              "AdClean KE has transformed my gaming experience. No more lag from
+              ads and the connection is much more stable."
+            </p>
+            <div class="author">- David M., Nairobi</div>
+          </div>
+          <div class="testimonial">
+            <p>
+              "My cybercafe runs so much smoother now. Customers love the faster
+              browsing and I'm saving on bandwidth costs."
+            </p>
+            <div class="author">- Sarah K., Mombasa</div>
+          </div>
+          <div class="testimonial">
+            <p>
+              "As a student, the data saving feature is a game-changer. I can do
+              more research with less data."
+            </p>
+            <div class="author">- James W., Kisumu</div>
+          </div>
+        </div>
+      </section>
+
+      <section style="text-align: center; margin: 3rem 0">
+        <h2 style="color: var(--primary); margin-bottom: 1rem">
+          Ready to Get Started?
+        </h2>
+        <p style="margin-bottom: 2rem">
+          Join thousands of satisfied customers enjoying faster, cleaner
+          internet
+        </p>
+        <button
+          class="cta-button"
+          style="width: auto; padding: 1rem 3rem; display: inline-block"
+          data-plan="gamer"
+          data-amount="150"
+        >
+          Get AdClean KE Now
+        </button>
+      </section>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>AdClean KE</h3>
+          <p>
+            Faster, cleaner internet for everyone. Block ads, save data, and
+            protect your privacy.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>
+            Email:
+            <a href="mailto:support@adclean.co.ke">support@adclean.co.ke</a>
+          </p>
+          <p>
+            WhatsApp: <a href="https://wa.me/254794242155">+254 794 242 155</a>
+          </p>
+          <p>M-Pesa: +254 794 242 155</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <p><a href="#">Home</a></p>
+          <p><a href="#">Plans & Pricing</a></p>
+          <p><a href="#">Setup Instructions</a></p>
+          <p><a href="#">Support</a></p>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>© 2025 AdClean KE. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Payment Modal -->
+    <div class="modal" id="paymentModal">
+      <div class="modal-content">
+        <button class="close-btn" id="closeModal">&times;</button>
+        <div id="paymentForm">
+          <h2 style="margin-bottom: 1.5rem; color: var(--primary)">
+            Complete Your Purchase
+          </h2>
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Enter your full name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              placeholder="2547XXXXXXXX"
+              pattern="254[0-9]{9}"
+              required
+            />
+            <small style="color: #666; display: block; margin-top: 0.25rem"
+              >Format: 2547XXXXXXXX (12 digits)</small
+            >
+          </div>
+          <div class="form-group">
+            <label for="paymentMethod">Payment Method</label>
+            <select id="paymentMethod" required>
+              <option value="">Select payment method</option>
+              <option value="mpesa">M-Pesa</option>
+              <option value="paypal">PayPal</option>
+            </select>
+          </div>
+
+          <div id="mpesaPayment" class="payment-method">
+            <div class="mpesa-instructions">
+              <h4>M-Pesa Payment Instructions</h4>
+              <p>
+                <strong>Amount:</strong> <span id="mpesaAmount">0</span> KSh
+              </p>
+              <p><strong>Paybill:</strong> 247247</p>
+              <p>
+                <strong>Account:</strong> <span id="mpesaAccount">ADCLEAN</span>
+              </p>
+              <p>
+                You will receive a prompt on your phone to enter your M-Pesa PIN
+              </p>
+            </div>
+            <button class="cta-button" id="payWithMpesa">
+              Pay with M-Pesa
+            </button>
+          </div>
+
+          <div id="paypalPayment" class="payment-method">
+            <div id="paypal-button-container"></div>
+          </div>
+        </div>
+
+        <div id="paymentProcessing" class="confirmation">
+          <div class="loader"></div>
+          <h3>Processing Payment...</h3>
+          <p>Please wait while we process your payment</p>
+        </div>
+
+        <div id="confirmation" class="confirmation">
+          <h3>Payment Successful! 🎉</h3>
+          <p>
+            Thank you for subscribing to
+            <strong id="confirmedPlan">Basic Plan</strong>
+          </p>
+          <p>
+            We've sent setup instructions to
+            <strong id="confirmedEmail">your email</strong>
+          </p>
+          <p>Your service is now <span class="status-success">ACTIVE</span></p>
+          <div class="form-group">
+            <button class="cta-button" id="closeConfirmation">
+              Get Started
+            </button>
+          </div>
+        </div>
+
+        <div id="paymentFailed" class="confirmation">
+          <h3>Payment Failed</h3>
+          <p>There was an issue processing your payment.</p>
+          <p>Please try again or contact support if the problem persists.</p>
+          <button class="cta-button secondary" id="retryPayment">
+            Try Again
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Configuration
+      const API_BASE_URL = window.location.origin; // Change to your domain
+
+      // Plan details
+      const plans = {
+        trial: { name: "Free Trial", price: 0, duration: "7 days" },
+        basic: { name: "Basic Plan", price: 80, duration: "1 month" },
+        gamer: { name: "Gamer Plan", price: 150, duration: "1 month" },
+        venue: { name: "Business Plan", price: 1500, duration: "1 month" },
+      };
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get modal elements
+        const modal = document.getElementById("paymentModal");
+        const closeModal = document.getElementById("closeModal");
+        const paymentForm = document.getElementById("paymentForm");
+        const paymentProcessing = document.getElementById("paymentProcessing");
+        const confirmation = document.getElementById("confirmation");
+        const paymentFailed = document.getElementById("paymentFailed");
+        const closeConfirmationBtn =
+          document.getElementById("closeConfirmation");
+        const retryPaymentBtn = document.getElementById("retryPayment");
+        const paymentMethodSelect = document.getElementById("paymentMethod");
+        const mpesaPayment = document.getElementById("mpesaPayment");
+        const paypalPayment = document.getElementById("paypalPayment");
+        const payWithMpesaBtn = document.getElementById("payWithMpesa");
+        const mpesaAmount = document.getElementById("mpesaAmount");
+        const mpesaAccount = document.getElementById("mpesaAccount");
+        const confirmedPlan = document.getElementById("confirmedPlan");
+        const confirmedEmail = document.getElementById("confirmedEmail");
+
+        let currentPlan = "";
+        let currentAmount = 0;
+
+        // Get all CTA buttons
+        const ctaButtons = document.querySelectorAll(".cta-button");
+
+        // Add click event to all CTA buttons
+        ctaButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            currentPlan = this.getAttribute("data-plan");
+            currentAmount = parseInt(this.getAttribute("data-amount"));
+
+            // If it's the free trial
+            if (currentPlan === "trial") {
+              startFreeTrial();
+            } else {
+              // Show payment modal for paid plans
+              showPaymentModal();
+            }
+          });
+        });
+
+        // Close modal when clicking the X
+        closeModal.addEventListener("click", function () {
+          closeModalFunc();
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener("click", function (event) {
+          if (event.target === modal) {
+            closeModalFunc();
+          }
+        });
+
+        // Handle payment method selection
+        paymentMethodSelect.addEventListener("change", function () {
+          // Hide all payment methods
+          mpesaPayment.classList.remove("active");
+          paypalPayment.classList.remove("active");
+
+          // Show selected payment method
+          if (this.value === "mpesa") {
+            mpesaPayment.classList.add("active");
+            mpesaAmount.textContent = currentAmount;
+            mpesaAccount.textContent = `ADCLEAN${currentPlan.toUpperCase()}`;
+          } else if (this.value === "paypal") {
+            paypalPayment.classList.add("active");
+            initializePayPal();
+          }
+        });
+
+        // M-Pesa payment
+        payWithMpesaBtn.addEventListener("click", function () {
+          processMpesaPayment();
+        });
+
+        // Close confirmation
+        closeConfirmationBtn.addEventListener("click", function () {
+          closeModalFunc();
+          // Redirect to setup instructions
+          window.location.href = "setup-instructions.html";
+        });
+
+        // Retry payment
+        retryPaymentBtn.addEventListener("click", function () {
+          paymentFailed.style.display = "none";
+          paymentForm.style.display = "block";
+        });
+
+        function showPaymentModal() {
+          modal.style.display = "flex";
+          resetModal();
+        }
+
+        function resetModal() {
+          paymentForm.style.display = "block";
+          paymentProcessing.style.display = "none";
+          confirmation.style.display = "none";
+          paymentFailed.style.display = "none";
+
+          // Reset form
+          document.getElementById("name").value = "";
+          document.getElementById("email").value = "";
+          document.getElementById("phone").value = "";
+          document.getElementById("paymentMethod").value = "";
+          mpesaPayment.classList.remove("active");
+          paypalPayment.classList.remove("active");
+
+          // Clear PayPal buttons if they exist
+          if (
+            document.getElementById("paypal-button-container").hasChildNodes()
+          ) {
+            document.getElementById("paypal-button-container").innerHTML = "";
+          }
+        }
+
+        function closeModalFunc() {
+          modal.style.display = "none";
+        }
+
+        function showProcessing() {
+          paymentForm.style.display = "none";
+          paymentProcessing.style.display = "block";
+          confirmation.style.display = "none";
+          paymentFailed.style.display = "none";
+        }
+
+        function showConfirmation(plan, email) {
+          paymentForm.style.display = "none";
+          paymentProcessing.style.display = "none";
+          confirmation.style.display = "block";
+          paymentFailed.style.display = "none";
+
+          confirmedPlan.textContent = plans[plan].name;
+          confirmedEmail.textContent = email;
+        }
+
+        function showPaymentFailed() {
+          paymentForm.style.display = "none";
+          paymentProcessing.style.display = "none";
+          confirmation.style.display = "none";
+          paymentFailed.style.display = "block";
+        }
+
+        function startFreeTrial() {
+          const name = prompt("Enter your name to start free trial:");
+          const email = prompt("Enter your email:");
+
+          if (name && email) {
+            // Send free trial request to backend
+            fetch(`${API_BASE_URL}/api/trial`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                name: name,
+                email: email,
+                plan: "trial",
+              }),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.success) {
+                  alert(
+                    "Free trial started! Check your email for setup instructions."
+                  );
+                } else {
+                  alert("Error starting trial. Please contact support.");
+                }
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+                alert("Error starting trial. Please contact support.");
+              });
+          }
+        }
+
+        function initializePayPal() {
+          // Clear previous buttons
+          document.getElementById("paypal-button-container").innerHTML = "";
+
+          // Render PayPal buttons
+          paypal
+            .Buttons({
+              createOrder: function (data, actions) {
+                // Convert KSh to USD (approximate conversion)
+                const usdAmount = (currentAmount / 115).toFixed(2);
+
+                return actions.order.create({
+                  purchase_units: [
+                    {
+                      description: `AdClean KE - ${plans[currentPlan].name}`,
+                      amount: {
+                        value: usdAmount,
+                        currency_code: "USD",
+                      },
+                    },
+                  ],
+                });
+              },
+              onApprove: function (data, actions) {
+                showProcessing();
+
+                return actions.order.capture().then(function (details) {
+                  // Send payment details to backend
+                  const userData = {
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email").value,
+                    phone: document.getElementById("phone").value,
+                    plan: currentPlan,
+                    payment_method: "paypal",
+                    payment_id: details.id,
+                    amount: currentAmount,
+                  };
+
+                  processPayment(userData);
+                });
+              },
+              onError: function (err) {
+                console.error("PayPal Error:", err);
+                showPaymentFailed();
+              },
+            })
+            .render("#paypal-button-container");
+        }
+
+        function processMpesaPayment() {
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const phone = document.getElementById("phone").value;
+
+          // Basic validation
+          if (!name || !email || !phone) {
+            alert("Please fill in all fields");
+            return;
+          }
+
+          if (!phone.startsWith("254") || phone.length !== 12) {
+            alert("Please enter a valid Kenyan phone number (2547XXXXXXXX)");
+            return;
+          }
+
+          showProcessing();
+
+          // Prepare payment data
+          const paymentData = {
+            name: name,
+            email: email,
+            phone: phone,
+            plan: currentPlan,
+            payment_method: "mpesa",
+            amount: currentAmount,
+          };
+
+          // Call backend to initiate M-Pesa STK Push
+          fetch(`${API_BASE_URL}/api/initiate-mpesa`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(paymentData),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                // Poll for payment confirmation
+                pollForPaymentStatus(data.transaction_id);
+              } else {
+                showPaymentFailed();
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              showPaymentFailed();
+            });
+        }
+
+        function pollForPaymentStatus(transactionId) {
+          let attempts = 0;
+          const maxAttempts = 30; // 30 attempts = 2.5 minutes
+
+          const checkStatus = setInterval(() => {
+            attempts++;
+
+            fetch(`${API_BASE_URL}/api/payment-status/${transactionId}`)
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.status === "completed") {
+                  clearInterval(checkStatus);
+                  processPaymentSuccess(data);
+                } else if (data.status === "failed") {
+                  clearInterval(checkStatus);
+                  showPaymentFailed();
+                } else if (attempts >= maxAttempts) {
+                  clearInterval(checkStatus);
+                  // Timeout - ask user to confirm payment manually
+                  alert(
+                    "Payment processing is taking longer than expected. Please check your phone and confirm if you have entered your M-Pesa PIN. If paid, your service will be activated shortly."
+                  );
+                  showPaymentFailed();
+                }
+              })
+              .catch((error) => {
+                console.error("Error checking payment status:", error);
+                if (attempts >= maxAttempts) {
+                  clearInterval(checkStatus);
+                  showPaymentFailed();
+                }
+              });
+          }, 5000); // Check every 5 seconds
+        }
+
+        function processPayment(userData) {
+          // Send payment data to backend
+          fetch(`${API_BASE_URL}/api/process-payment`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userData),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                processPaymentSuccess(data);
+              } else {
+                showPaymentFailed();
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              showPaymentFailed();
+            });
+        }
+
+        function processPaymentSuccess(data) {
+          // Send confirmation email
+          fetch(`${API_BASE_URL}/api/send-confirmation`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: data.customer.email,
+              plan: data.customer.plan,
+              transaction_id: data.transaction_id,
+            }),
+          });
+
+          showConfirmation(data.customer.plan, data.customer.email);
+        }
+      });
+    </script>
+  </body>
+</html>
